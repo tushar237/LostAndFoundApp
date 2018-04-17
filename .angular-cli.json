@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "lost-and-found-app"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.scss",
+		"../node_modules/custom-lib/bootstrap/css/bootstrap.min.css",
+		"../node_modules/custom-lib/animate-css/animate.min.css",
+		"../node_modules/custom-lib/font-awesome/css/font-awesome.min.css"
+      ],
+      "scripts": [
+	  "../node_modules/custom-lib/jquery/jquery.min.js",
+	  "../node_modules/custom-lib/bootstrap/js/bootstrap.min.js",
+	  "../node_modules/custom-lib/superfish/hoverIntent.js",
+      "../node_modules/custom-lib/superfish/superfish.min.js",
+      "../node_modules/custom-lib/morphext/morphext.min.js",
+      "../node_modules/custom-lib/wow/wow.min.js",
+      "../node_modules/custom-lib/stickyjs/sticky.js",
+      "../node_modules/custom-lib/easing/easing.js",
+	  "../node_modules/custom-js/custom/custom.js"
+	  ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {}
+  }
+}
