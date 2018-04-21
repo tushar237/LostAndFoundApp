@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicesApiService } from '../services/services-api.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AppComponent {
   phone:String="";
   attachment:String="";
   description:String="";
-  constructor(
+  constructor(private services:ServicesApiService
   ){
 	  
   }
@@ -30,23 +31,29 @@ export class AppComponent {
 	  
   onSubmit()
   {
-	  /*
+	  var category;
+	  if(this.selectedCategory==0)
 	  {
-	"createdOn": "07-04-2018",
-	"data": {
-		"category": "Lost",
-		"name": "Chetan Chauhan",
-		"email": "chetan.gitm@gmail.com",
-		"attachment": "aadskjshjksahkjsahkjsakjashjkaskjdsa",
-		"description": "Fossil watch is lost",
-		"lostRcvDate": "07-04-2018"
-	   }
-      }
-	  */
-	  var data={"category":this.selectedCategory,"name":this.name,"email":this.email,"attachment":this.attachment,
+		  category="lost";
+	  }
+	  else
+	  {
+		  category="found";
+	  }
+	  var data={"category":category,"name":this.name,"email":this.email,"attachment":this.attachment,
 	  "description":this.description,"lostRcvDate":"08-04-2018"};
-	  this.lostFormData={"createdOn":new Date().toString(),"data":data};
-	  alert(JSON.stringify(this.lostFormData));
+    this.lostFormData={"createdOn":new Date().toString(),"data":data};
+    this.services.insertLostRecord(this.lostFormData).then((response)=>{
+      if (response._body.code)
+	  {
+		  alert("Post submitted successfully");
+	  }
+	  else
+	  {
+		 alert("Something went wrong.");
+	  }
+    });
+	  
   }
 	  
 	  
