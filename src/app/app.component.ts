@@ -44,7 +44,7 @@ export class AppComponent {
 	  "description":this.description,"lostRcvDate":"08-04-2018"};
     this.lostFormData={"createdOn":new Date().toString(),"data":data};
     this.services.insertLostRecord(this.lostFormData).then((response)=>{
-      if (response._body.code)
+      if (response._body.code == 200)
 	  {
 		  alert("Post submitted successfully");
 	  }
