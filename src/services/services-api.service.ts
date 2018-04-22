@@ -23,7 +23,7 @@ export class ServicesApiService {
     return new Promise(resolve => {
       this.http.post(url, payload)
         .subscribe(data => {
-          applyLeaveData = JSON.parse(data._body);
+          applyLeaveData = JSON.parse(data["_body"]);
           resolve(applyLeaveData);
         });
     });
