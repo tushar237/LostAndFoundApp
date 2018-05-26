@@ -20,7 +20,7 @@ export class AppComponent {
   image:any;
   constructor(private services:ServicesApiService
   ){
-
+    this.title="Lost";
   }
   
   onCategoryChange(e)
