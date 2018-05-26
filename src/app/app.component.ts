@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ServicesApiService } from '../services/services-api.service';
+import { ServicesApiService } from '../services/services-api.service'; 
 
 
 @Component({
@@ -17,15 +17,28 @@ export class AppComponent {
   phone:String="";
   attachment:String="";
   description:String="";
+  image:any;
   constructor(private services:ServicesApiService
   ){
-	  
+
   }
   
+  onCategoryChange(e)
+  {
+    if(this.selectedCategory==0)
+    {
+      this.title="Lost";
+    }
+    else
+    {
+      this.title="Found";
+    }
+  }
+
   changeTab(index)
 	  { 
 		 this.tabIndex=index;
-         this.selectedCategory=index; 		 
+     this.selectedCategory=index; 		 
 		 //alert(this.tabIndex);
 	  }
 	  
@@ -40,13 +53,13 @@ export class AppComponent {
 	  {
 		  category="found";
 	  }
-	  var data={"category":category,"name":this.name,"email":this.email,"attachment":this.attachment,
+	  var data={"category":category,"name":this.name,"email":this.email,"attachment":this.image,
 	  "description":this.description,"lostRcvDate":"08-04-2018"};
     this.lostFormData={"createdOn":new Date().toString(),"data":data};
     this.services.insertLostRecord(this.lostFormData).then((response)=>{
     console.log(JSON.stringify(response));;
     
-      if (response.code == 200)
+    if (response.code == 200)
 	  {
 		  alert("Post submitted successfully");
 	  }
@@ -57,6 +70,24 @@ export class AppComponent {
     });
 	  
   }
+
+  
+  
+  changeListener(fileInput) {
+    this.readThis(fileInput.target);
+  }
+  
+  readThis(inputValue: any): void {
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+    myReader.readAsDataURL(file);
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+      //console.log(this.image);
+    }
+    
+  }
+
 	  
 	  
 }

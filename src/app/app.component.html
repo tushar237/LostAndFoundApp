@@ -383,16 +383,16 @@
   ============================-->
   <section id="post">
   <div class="container">
-  <ul class="nav nav-pills">
+ <!-- <ul class="nav nav-pills">
     <li class="active"><a data-toggle="pill" (click)="changeTab(0)">LOST</a></li>
     <li><a data-toggle="pill" (click)="changeTab(1)">FOUND</a></li>
-  </ul>
+  </ul>-->
   
   <div class="tab-content">
-    <div id="lost" *ngIf="tabIndex == 0" >
+    <div id="lost" >
      <div class="row">
         <div class="col-md-12" style="left: 14%;margin-bottom: 2%;">
-          <h3 class="section-title ">LOST</h3>
+          <h3 class="section-title ">{{title}}</h3>
           <div class="section-title-divider"></div>
           <!--<p class="section-description margin-section-description">Please fill details of the lost item.</p>-->
         </div>
@@ -443,9 +443,9 @@
             <div id="errormessage"></div>
             <form  (ngSubmit)="onSubmit()" method="post" role="form" class="contactForm">
              <div class="form-group">
-			      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selecteCategory" id="sel1">
-				    <option value='0' selected>Lost</option>
-				    <option value='1'>Found</option>
+			      <select class="form-control" (change)="onCategoryChange($event)" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedCategory" id="sel1">
+				    <option value="0" selected>Lost</option>
+				    <option value="1">Found</option>
 				  </select>
 				  <div class="validation"></div>
 				  </div>
@@ -462,7 +462,7 @@
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-              <input id="fileUpload" name="FileUpload" [(ngModel)]="attachment" [ngModelOptions]="{standalone: true}" multiple="" type="file" /> 
+              <input id="fileUpload" name="FileUpload" (change)="changeListener($event)" [(ngModel)]="attachment" [ngModelOptions]="{standalone: true}" multiple="" type="file" /> 
               <div class="validation"></div>
               </div>
               <div class="form-group">
@@ -479,90 +479,6 @@
 	
 	
 	
-    <div id="found" *ngIf="tabIndex == 1">
-      
-	   <div class="row">
-        <div class="col-md-12" style="left: 14%;margin-bottom: 2%;">
-          <h3 class="section-title">FOUND</h3>
-          <div class="section-title-divider "></div>
-<!--<p class="section-description margin-section-description">Please fill details of found item.</p>-->
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-5 col-md-push-2">
-          <div class="info">
-          <div>
-              <i class="fa fa-check-circle-o"></i>
-              <p>Category</p>
-            </div>
-
-            <div>
-              <i class="fa fa-map-marker"></i>
-              <p>Name</p>
-            </div>
-
-            <div>
-              <i class="fa fa-envelope"></i>
-              <p>Email Id</p>
-            </div>
-
-            <div>
-              <i class="fa fa-phone"></i>
-              <p>Phone Number</p>
-            </div>
-           
-            <div>
-            <i class="fa fa-photo"></i>
-            <p>Attachment or Photo</p>
-            </div>
-
-            <div>
-            <i class="fa fa-comment"></i>
-            <p>Description</p>
-            </div>
-
-
-
-          </div>
-        </div>
-
-
-        <div class="col-md-5 col-md-push-2">
-         <form  (ngSubmit)="onSubmit()" method="post" role="form" class="contactForm">
-             <div class="form-group">
-			      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selecteCategory" id="sel1">
-				    <option value='0' >Lost</option>
-				    <option value='1' selected>Found</option>
-				  </select>
-				  <div class="validation"></div>
-				  </div>
-              <div class="form-group">
-                <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"  name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" name="subject" id="subject" placeholder="Your Phone no." data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-              <input id="fileUpload" name="FileUpload" [(ngModel)]="attachment" [ngModelOptions]="{standalone: true}" multiple="" type="file" /> 
-              <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <textarea [(ngModel)]="description" [ngModelOptions]="{standalone: true}" class="form-control" name="message" rows="5" data-rule="required" data-msg="Please enter a Description" placeholder="Details about Item or Person"></textarea>
-                <div class="validation"></div>
-              </div>
-              <div class="text-center"><button type="submit" >Submit</button></div>
-            </form>
-          </div>
-        </div>
-
-      </div>
 	  
     </div>
    

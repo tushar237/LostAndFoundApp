@@ -7,7 +7,7 @@ export class ServicesApiService {
 
   constants:any={
 	  "proxyUrl":"https://cors-anywhere.herokuapp.com/",
-    "insertLostRecordUrl":"http://192.168.56.1:8080/LostNFound/report/lost"
+    "insertLostRecordUrl":"http://192.168.0.111:8080/LostNFound/report/lost"
   }
 
   insertLostRecord(payload): any {
@@ -23,7 +23,7 @@ export class ServicesApiService {
     return new Promise(resolve => {
       this.http.post(url, payload)
         .subscribe(data => {
-          applyLeaveData = JSON.parse(data._body);
+          applyLeaveData = JSON.parse(data["_body"]);
           resolve(applyLeaveData);
         });
     });
