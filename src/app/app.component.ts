@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ServicesApiService } from '../services/services-api.service'; 
+import { ServicesApiService } from '../services/services-api.service';
+import {IMyDpOptions} from 'mydatepicker';
 
 
 @Component({
@@ -18,10 +19,21 @@ export class AppComponent {
   attachment:String="";
   description:String="";
   image:any;
+  selectedDate:any;
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+};
+
+// Initialized to specific date (09.10.2018).
+public model: any ;
   constructor(private services:ServicesApiService
   ){
     this.title="Lost";
+    var today=new Date();
+    this.selectedDate= { date: { year: today.getFullYear(), month: today.getMonth()+1, day:today.getDate() } };
   }
+
   
   onCategoryChange(e)
   {
@@ -52,9 +64,11 @@ export class AppComponent {
 	  else
 	  {
 		  category="found";
-	  }
+    }
+    var lostRcvDate=this.selectedDate.date.day+"-"+this.selectedDate.date.month+"-"+this.selectedDate.date.year;
+    console.log(lostRcvDate);
 	  var data={"category":category,"name":this.name,"email":this.email,"attachment":this.image,
-	  "description":this.description,"lostRcvDate":"08-04-2018"};
+	  "description":this.description,"lostRcvDate":lostRcvDate};
     this.lostFormData={"createdOn":new Date().toString(),"data":data};
     this.services.insertLostRecord(this.lostFormData).then((response)=>{
     console.log(JSON.stringify(response));;

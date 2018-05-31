@@ -399,7 +399,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-5 col-md-push-2">
+        <div class="col-md-6 col-md-push-2">
           <div class="info">
           <div>
               <i class="fa fa-check-circle-o"></i>
@@ -420,6 +420,11 @@
               <i class="fa fa-phone"></i>
               <p>Phone Number</p>
             </div>
+
+            <div>
+                <i class="fa fa-calendar"></i>
+                <p>Date</p>
+              </div>
            
             <div>
             <i class="fa fa-photo"></i>
@@ -437,7 +442,7 @@
         </div>
 
 
-        <div class="col-md-5 col-md-push-2">
+        <div class="col-md-6 col-md-push-2">
           <div class="form">
             <div id="sendmessage">Your message has been sent. Thank you!</div>
             <div id="errormessage"></div>
@@ -461,6 +466,10 @@
                 <input type="text" class="form-control" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" name="subject" id="subject" placeholder="Your Phone no." data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                 <div class="validation"></div>
               </div>
+              <div class="form-group">
+                  <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                  [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true}"  required></my-date-picker>
+                </div>
               <div class="form-group">
               <input id="fileUpload" name="FileUpload" (change)="changeListener($event)" [(ngModel)]="attachment" [ngModelOptions]="{standalone: true}" multiple="" type="file" /> 
               <div class="validation"></div>

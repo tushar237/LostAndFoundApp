@@ -4,10 +4,10 @@ import { Http,RequestOptions,Headers } from '@angular/http';
 export class ServicesApiService {
 
   constructor(private http:Http) { }
-
+  rootUrl:string="https://192.168.0.115:8080";
   constants:any={
 	  "proxyUrl":"https://cors-anywhere.herokuapp.com/",
-    "insertLostRecordUrl":"http://192.168.0.111:8080/LostNFound/report/lost"
+    "insertLostRecordUrl":this.rootUrl+"/LostNFound/report/lostandfound"
   }
 
   insertLostRecord(payload): any {
