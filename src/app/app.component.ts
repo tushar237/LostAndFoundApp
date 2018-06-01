@@ -20,6 +20,7 @@ export class AppComponent {
   description:String="";
   image:any;
   selectedDate:any;
+  showLoader:boolean;
   public myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'dd.mm.yyyy',
@@ -31,6 +32,7 @@ public model: any ;
   ){
     this.title="Lost";
     var today=new Date();
+    this.showLoader=false;
     this.selectedDate= { date: { year: today.getFullYear(), month: today.getMonth()+1, day:today.getDate() } };
   }
 
@@ -56,7 +58,9 @@ public model: any ;
 	  
   onSubmit()
   {
-	  var category;
+    this.showLoader=true;
+    var category;
+    var createdOn;
 	  if(this.selectedCategory==0)
 	  {
 		  category="lost";
@@ -65,22 +69,26 @@ public model: any ;
 	  {
 		  category="found";
     }
+    var today=new Date();
+    createdOn=today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
     var lostRcvDate=this.selectedDate.date.day+"-"+this.selectedDate.date.month+"-"+this.selectedDate.date.year;
-    console.log(lostRcvDate);
 	  var data={"category":category,"name":this.name,"email":this.email,"attachment":this.image,
 	  "description":this.description,"lostRcvDate":lostRcvDate};
-    this.lostFormData={"createdOn":new Date().toString(),"data":data};
+    this.lostFormData={"createdOn":createdOn,"data":data};
+    console.log(JSON.stringify(this.lostFormData));
     this.services.insertLostRecord(this.lostFormData).then((response)=>{
-    console.log(JSON.stringify(response));;
     
     if (response.code == 200)
 	  {
+      this.showLoader=false;
 		  alert("Post submitted successfully");
 	  }
 	  else
 	  {
+      this.showLoader=false;
 		 alert("Something went wrong.");
-	  }
+    }
+    
     });
 	  
   }

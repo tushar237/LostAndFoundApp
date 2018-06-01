@@ -4,7 +4,8 @@ import { Http,RequestOptions,Headers } from '@angular/http';
 export class ServicesApiService {
 
   constructor(private http:Http) { }
-  rootUrl:string="https://192.168.0.115:8080";
+  //rootUrl:string="https://192.168.0.115:8080";
+  rootUrl:string="http://localhost:8080";
   constants:any={
 	  "proxyUrl":"https://cors-anywhere.herokuapp.com/",
     "insertLostRecordUrl":this.rootUrl+"/LostNFound/report/lostandfound"
@@ -25,7 +26,7 @@ export class ServicesApiService {
         .subscribe(data => {
           applyLeaveData = JSON.parse(data["_body"]);
           resolve(applyLeaveData);
-        });
+        }); 
     });
   }
 
